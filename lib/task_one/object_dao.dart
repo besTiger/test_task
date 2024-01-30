@@ -18,6 +18,7 @@ class ObjectDao {
         id: maps[i]['id'] as int,
         name: maps[i]['name'] as String,
         description: maps[i]['description'] as String,
+        timestamp: DateTime.parse(maps[i]['timestamp'] as String),
       );
     });
   }
@@ -25,7 +26,8 @@ class ObjectDao {
   Future<int> updateObject(ObjectModel object) async {
     final db = await dbHelper.database;
     return await db?.update('objects', object.toMap(),
-        where: 'id = ?', whereArgs: [object.id]) ?? 0;
+            where: 'id = ?', whereArgs: [object.id]) ??
+        0;
   }
 
   Future<int> deleteObject(int id) async {

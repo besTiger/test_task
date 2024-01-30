@@ -17,8 +17,10 @@ class ObjectEditScreenState extends State<ObjectEditScreen> {
   @override
   void initState() {
     super.initState();
-    _nameController = TextEditingController(text: widget.initialObject?.name ?? '');
-    _descriptionController = TextEditingController(text: widget.initialObject?.description ?? '');
+    _nameController =
+        TextEditingController(text: widget.initialObject?.name ?? '');
+    _descriptionController =
+        TextEditingController(text: widget.initialObject?.description ?? '');
   }
 
   @override
@@ -26,7 +28,8 @@ class ObjectEditScreenState extends State<ObjectEditScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(widget.initialObject == null ? 'Add Object' : 'Edit Object'),
+          title:
+              Text(widget.initialObject == null ? 'Add Object' : 'Edit Object'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -60,8 +63,16 @@ class ObjectEditScreenState extends State<ObjectEditScreen> {
     final String description = _descriptionController.text;
 
     final ObjectModel updatedObject = widget.initialObject != null
-        ? widget.initialObject!.copyWith(name: name, description: description)
-        : ObjectModel(name: name, description: description);
+        ? widget.initialObject!.copyWith(
+            name: name,
+            description: description,
+            timestamp: DateTime.now(),
+          )
+        : ObjectModel(
+            name: name,
+            description: description,
+            timestamp: DateTime.now(),
+          );
 
     // Close the current screen and return the updatedObject to the previous screen
     Navigator.pop(context, updatedObject);

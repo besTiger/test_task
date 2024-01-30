@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'object_dao.dart';
 import 'object_model.dart';
 import 'object_edit_screen.dart';
@@ -23,28 +24,25 @@ class ObjectsScreenState extends State<ObjectsScreen> {
         body: FutureBuilder<List<ObjectModel>>(
           future: objectDao.getAllObjects(),
           builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
-
             if (!snapshot.hasData || snapshot.data!.isEmpty) {
               return const Center(
                 child: Text('No objects available'),
               );
             }
-
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
               ),
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
+                final formattedTimestamp = DateFormat('HH:mm:ss')
+                    .format(snapshot.data![index].timestamp);
 
                 return SizedBox(
-                  height: 120.0, // Задайте фіксовану висоту картки
+                  height: 120.0,
                   child: Card(
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(12.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -70,8 +68,14 @@ class ObjectsScreenState extends State<ObjectsScreen> {
                               ],
                             ),
                           ),
+                          Text(
+                            'Time: $formattedTimestamp',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey,
+                            ),
+                          ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               IconButton(
                                 icon: Icon(
@@ -79,7 +83,8 @@ class ObjectsScreenState extends State<ObjectsScreen> {
                                   color: Colors.green[200],
                                 ),
                                 onPressed: () async {
-                                  final updatedObject = await Navigator.push<ObjectModel>(
+                                  final updatedObject =
+                                      await Navigator.push<ObjectModel>(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => ObjectEditScreen(
@@ -100,7 +105,8 @@ class ObjectsScreenState extends State<ObjectsScreen> {
                                   color: Colors.red[200],
                                 ),
                                 onPressed: () async {
-                                  await objectDao.deleteObject(snapshot.data![index].id!);
+                                  await objectDao
+                                      .deleteObject(snapshot.data![index].id!);
                                   setState(() {});
                                 },
                               ),
@@ -111,8 +117,6 @@ class ObjectsScreenState extends State<ObjectsScreen> {
                     ),
                   ),
                 );
-
-
               },
             );
           },

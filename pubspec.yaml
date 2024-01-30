@@ -19,6 +19,9 @@ dependencies:
   # ***Used locations on the filesystem***
   path_provider: 2.1.2
 
+  # ***For the timestamp***
+  intl: 0.19.0
+
 
 dev_dependencies:
 

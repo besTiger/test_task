@@ -23,7 +23,8 @@ class DatabaseHelper {
       CREATE TABLE objects(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
-        description TEXT
+        description TEXT,
+        timestamp TEXT
       )
     ''');
   }
