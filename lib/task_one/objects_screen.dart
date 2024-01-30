@@ -37,9 +37,8 @@ class ObjectsScreenState extends State<ObjectsScreen> {
               itemBuilder: (context, index) {
                 final formattedTimestamp = DateFormat('HH:mm:ss')
                     .format(snapshot.data![index].timestamp);
-
-                return SizedBox(
-                  height: 120.0,
+                return Padding(
+                    padding: const EdgeInsets.all(8.0),
                   child: Card(
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
@@ -62,7 +61,7 @@ class ObjectsScreenState extends State<ObjectsScreen> {
                                 const SizedBox(height: 8.0),
                                 Text(
                                   snapshot.data![index].description,
-                                  maxLines: 3,
+                                  maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ],
