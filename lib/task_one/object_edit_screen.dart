@@ -1,5 +1,3 @@
-// object_edit_screen.dart
-
 import 'package:flutter/material.dart';
 import 'object_model.dart';
 
@@ -9,10 +7,10 @@ class ObjectEditScreen extends StatefulWidget {
   const ObjectEditScreen({Key? key, this.initialObject}) : super(key: key);
 
   @override
-  _ObjectEditScreenState createState() => _ObjectEditScreenState();
+  ObjectEditScreenState createState() => ObjectEditScreenState();
 }
 
-class _ObjectEditScreenState extends State<ObjectEditScreen> {
+class ObjectEditScreenState extends State<ObjectEditScreen> {
   late TextEditingController _nameController;
   late TextEditingController _descriptionController;
 
@@ -25,30 +23,32 @@ class _ObjectEditScreenState extends State<ObjectEditScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.initialObject == null ? 'Add Object' : 'Edit Object'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: _nameController,
-              decoration: InputDecoration(labelText: 'Name'),
-            ),
-            TextField(
-              controller: _descriptionController,
-              decoration: InputDecoration(labelText: 'Description'),
-            ),
-            const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                _saveObject();
-              },
-              child: Text(widget.initialObject == null ? 'Add' : 'Save'),
-            ),
-          ],
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.initialObject == null ? 'Add Object' : 'Edit Object'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              TextField(
+                controller: _nameController,
+                decoration: const InputDecoration(labelText: 'Name'),
+              ),
+              TextField(
+                controller: _descriptionController,
+                decoration: const InputDecoration(labelText: 'Description'),
+              ),
+              const SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: () {
+                  _saveObject();
+                },
+                child: Text(widget.initialObject == null ? 'Add' : 'Save'),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -66,5 +66,4 @@ class _ObjectEditScreenState extends State<ObjectEditScreen> {
     // Close the current screen and return the updatedObject to the previous screen
     Navigator.pop(context, updatedObject);
   }
-
 }
