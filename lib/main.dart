@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:test_task/task_one/objects_screen.dart';
+import 'bottom_navigation_bar.dart';
 
 
 Future<void> main() async {
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const ObjectsScreen(),
+      home: const MyBottomNavigationBar(),
     );
   }
 }
