@@ -19,11 +19,14 @@ class MovieDetailsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.network(
-              movie.posterPath,
-              height: 200,
-              width: 145,
-              fit: BoxFit.cover,
+            Hero(
+              tag: 'moviePoster${movie.id}',
+              child: Image.network(
+                movie.posterPath,
+                height: 200,
+                width: 145,
+                fit: BoxFit.cover,
+              ),
             ),
             const SizedBox(height: 16.0),
             Text(
